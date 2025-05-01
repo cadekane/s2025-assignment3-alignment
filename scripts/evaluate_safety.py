@@ -7,7 +7,7 @@ Running:
 ```
 python scripts/evaluate_safety.py \
     --input-path <path_to_predictions.jsonl> \
-    --model-name-or-path "/home/shared/Meta-Llama-3-70B-Instruct" \
+    --model-name-or-path "./Qwen/Qwen2.5-1.5B" \
     --num-gpus 2 \
     --output-path <path_to_write_output.jsonl>
 ```
@@ -32,6 +32,7 @@ def main(input_path, model_name_or_path, num_gpus, output_path):
         tensor_parallel_size=num_gpus,
         trust_remote_code=True,
         max_model_len=6144,
+        dtype="float16"
     )
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
     input_examples = []
